@@ -1,4 +1,4 @@
-package me.CHANGEME.slimefunaddon;
+package cn.piaoztsdy.PiaoAddon;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,7 +13,7 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 
-public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
+public class piaoAddon extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onEnable() {
@@ -28,7 +28,7 @@ public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
          * 1. 创建分类
          * 分类的显示物品将使用以下物品
          */
-        ItemStack itemGroupItem = new CustomItemStack(Material.DIAMOND, "&4附属分类");
+        ItemStack itemGroupItem = new CustomItemStack(Material.DIAMOND, "&4PiaoAddon");
 
         // 给你的分类提供一个独一无二的ID
         NamespacedKey itemGroupId = new NamespacedKey(this, "addon_category");
@@ -40,6 +40,7 @@ public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
          * 重要：每个物品都得有一个独一无二的ID
          */
         SlimefunItemStack slimefunItem = new SlimefunItemStack("COOL_DIAMOND", Material.DIAMOND, "&4炫酷的钻石", "&c+20% 炫酷");
+        SlimefunItemStack slimefunItem2 = new SlimefunItemStack("GREAT_DIAMOND_SWORD", Material.DIAMOND_SWORD, "&4炫酷的钻石剑", "&c+20% 炫酷\n&7+40% 强势");
 
         /*
          * 3. 创建配方
@@ -48,6 +49,7 @@ public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
          * 该配方所需的机器将在后面通过RecipeType指定。
          */
         ItemStack[] recipe = { new ItemStack(Material.EMERALD), null, new ItemStack(Material.EMERALD), null, new ItemStack(Material.DIAMOND), null, new ItemStack(Material.EMERALD), null, new ItemStack(Material.EMERALD) };
+        ItemStack[] recipe2 = { new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND), null, new ItemStack(Material.DIAMOND_SWORD), null, new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND), new ItemStack(Material.DIAMOND) };
 
         /*
          * 4. 注册物品
@@ -56,8 +58,12 @@ public class ExampleAddon extends JavaPlugin implements SlimefunAddon {
          * 该物品将在增强型工作台中合成。
          * 来自粘液科技本体的配方类型将会自动将配方添加到对应的机器中。
          */
+        // 注册炫酷的钻石
         SlimefunItem item = new SlimefunItem(itemGroup, slimefunItem, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
         item.register(this);
+        // 注册炫酷的钻石剑
+        SlimefunItem itemSword = new SlimefunItem(itemGroup, slimefunItem2, RecipeType.ENHANCED_CRAFTING_TABLE, recipe2);
+        itemSword.register(this);
     }
 
     @Override
